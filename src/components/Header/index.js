@@ -3,9 +3,14 @@ import {FaMoon} from 'react-icons/fa'
 import {IoSunnyOutline} from 'react-icons/io5'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {FiLogOut} from 'react-icons/fi'
+import {IoMdClose} from 'react-icons/io'
+import {AiFillHome} from 'react-icons/ai'
+import {HiFire} from 'react-icons/hi'
+import {SiYoutubegaming} from 'react-icons/si'
+import {CgPlayListAdd} from 'react-icons/cg'
+import {withRouter, Link} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import Cookies from 'js-cookie'
-import {withRouter} from 'react-router-dom'
 import ThemeContext from '../../Context/ThemeContext'
 import './index.css'
 
@@ -40,6 +45,26 @@ class Header extends Component {
             />
           )
 
+          const {location} = this.props
+          const {pathname} = location
+
+          const isHomeActive = pathname === '/'
+          const isTrendingActive = pathname === '/trending'
+          const isGamingActive = pathname === '/gaming'
+          const isSavedVideosActive = pathname === '/saved-videos'
+
+          const getActiveClass = isActive => {
+            if (!isActive) {
+              return ''
+            }
+
+            if (isDarkTheme) {
+              return 'active-menu-dark'
+            }
+
+            return 'active-menu-light'
+          }
+
           return (
             <div
               className={`header-container ${
@@ -63,13 +88,141 @@ class Header extends Component {
                   {themeIcon}
                 </button>
 
-                <button type="button" className="control-btn">
-                  <GiHamburgerMenu
-                    className={`icons ${
-                      isDarkTheme ? 'dark-icons' : 'light-icons'
-                    }`}
-                  />
-                </button>
+                <Popup
+                  modal
+                  trigger={
+                    <button type="button" className="control-btn">
+                      <GiHamburgerMenu
+                        className={`icons ${
+                          isDarkTheme ? 'dark-icons' : 'light-icons'
+                        }`}
+                      />
+                    </button>
+                  }
+                  className="popup-content"
+                >
+                  {close => (
+                    <div
+                      className={`menu-popup-container ${
+                        isDarkTheme
+                          ? 'menu-popup-container-dark'
+                          : 'menu-popup-container-light'
+                      }`}
+                    >
+                      <div className="menu-close-container">
+                        <button
+                          type="button"
+                          className={`menu-close-button ${
+                            isDarkTheme
+                              ? 'menu-close-button-dark'
+                              : 'menu-close-button-light'
+                          }`}
+                          onClick={() => close()}
+                        >
+                          <IoMdClose
+                            className={`icons ${
+                              isDarkTheme ? 'dark-icons' : 'light-icons'
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      <ul className="menu-list">
+                        <Link to="/" className="menu-link">
+                          <li
+                            className={`menu-item ${getActiveClass(
+                              isHomeActive,
+                            )}`}
+                          >
+                            <AiFillHome
+                              className={`menu-icon ${
+                                isHomeActive ? 'active-icon' : ''
+                              }`}
+                            />
+                            <p
+                              className={`menu-text ${
+                                isDarkTheme
+                                  ? 'menu-text-dark'
+                                  : 'menu-text-light'
+                              }`}
+                            >
+                              Home
+                            </p>
+                          </li>
+                        </Link>
+
+                        <Link to="/trending" className="menu-link">
+                          <li
+                            className={`menu-item ${getActiveClass(
+                              isTrendingActive,
+                            )}`}
+                          >
+                            <HiFire
+                              className={`menu-icon ${
+                                isTrendingActive ? 'active-icon' : ''
+                              }`}
+                            />
+                            <p
+                              className={`menu-text ${
+                                isDarkTheme
+                                  ? 'menu-text-dark'
+                                  : 'menu-text-light'
+                              }`}
+                            >
+                              Trending
+                            </p>
+                          </li>
+                        </Link>
+
+                        <Link to="/gaming" className="menu-link">
+                          <li
+                            className={`menu-item ${getActiveClass(
+                              isGamingActive,
+                            )}`}
+                          >
+                            <SiYoutubegaming
+                              className={`menu-icon ${
+                                isGamingActive ? 'active-icon' : ''
+                              }`}
+                            />
+                            <p
+                              className={`menu-text ${
+                                isDarkTheme
+                                  ? 'menu-text-dark'
+                                  : 'menu-text-light'
+                              }`}
+                            >
+                              Gaming
+                            </p>
+                          </li>
+                        </Link>
+
+                        <Link to="/saved-videos" className="menu-link">
+                          <li
+                            className={`menu-item ${getActiveClass(
+                              isSavedVideosActive,
+                            )}`}
+                          >
+                            <CgPlayListAdd
+                              className={`menu-icon ${
+                                isSavedVideosActive ? 'active-icon' : ''
+                              }`}
+                            />
+                            <p
+                              className={`menu-text ${
+                                isDarkTheme
+                                  ? 'menu-text-dark'
+                                  : 'menu-text-light'
+                              }`}
+                            >
+                              Saved Videos
+                            </p>
+                          </li>
+                        </Link>
+                      </ul>
+                    </div>
+                  )}
+                </Popup>
 
                 <Popup
                   modal

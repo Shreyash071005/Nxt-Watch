@@ -47,6 +47,104 @@
   color: #000000;
 }
 
+/* Menu Popup Container */
+
+.menu-popup-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-popup-container-dark {
+  background-color: #181818;
+}
+
+.menu-popup-container-light {
+  background-color: #ffffff;
+}
+
+.menu-close-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+}
+
+.menu-close-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 32px;
+}
+
+/* Close Icon */
+
+.menu-close-button-dark {
+  color: #ffffff;
+}
+
+.menu-close-button-light {
+  color: #181818;
+}
+
+/* Menu List */
+
+.menu-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.menu-link {
+  text-decoration: none;
+}
+
+.menu-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 90px;
+  gap: 20px;
+}
+
+/* Active Route */
+
+.active-menu-dark {
+  background-color: #383838;
+}
+
+.active-menu-light {
+  background-color: #e2e8f0;
+}
+
+/* Icons */
+
+.menu-icon {
+  font-size: 20px;
+  color: #909090;
+}
+
+.active-icon {
+  color: #ff0000;
+}
+
+/* Text */
+
+.menu-text {
+  font-size: 18px;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.menu-text-dark {
+  color: #ffffff;
+}
+
+.menu-text-light {
+  color: #181818;
+}
+
+/* Logout Container*/
 .popup-overlay {
   background: rgba(0, 0, 0, 0.5);
 }
