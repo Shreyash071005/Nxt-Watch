@@ -88,193 +88,227 @@ class Header extends Component {
                   {themeIcon}
                 </button>
 
-                <Popup
-                  modal
-                  trigger={
-                    <button type="button" className="control-btn">
-                      <GiHamburgerMenu
-                        className={`icons ${
-                          isDarkTheme ? 'dark-icons' : 'light-icons'
-                        }`}
-                      />
-                    </button>
-                  }
-                  className="popup-content"
-                >
-                  {close => (
-                    <div
-                      className={`menu-popup-container ${
-                        isDarkTheme
-                          ? 'menu-popup-container-dark'
-                          : 'menu-popup-container-light'
-                      }`}
-                    >
-                      <div className="menu-close-container">
-                        <button
-                          type="button"
-                          className={`menu-close-button ${
-                            isDarkTheme
-                              ? 'menu-close-button-dark'
-                              : 'menu-close-button-light'
-                          }`}
-                          onClick={() => close()}
-                        >
-                          <IoMdClose
+                {/* Menu Pop Up */}
+
+                <div>
+                  <div className="md-user-icon-account">
+                    <img
+                      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                      alt="profile"
+                      className="profile-icon"
+                    />
+                  </div>
+
+                  <div className="sm-menu-icon">
+                    <Popup
+                      modal
+                      trigger={
+                        <button type="button" className="control-btn">
+                          <GiHamburgerMenu
                             className={`icons ${
                               isDarkTheme ? 'dark-icons' : 'light-icons'
                             }`}
                           />
                         </button>
-                      </div>
-
-                      <ul className="menu-list">
-                        <Link to="/" className="menu-link">
-                          <li
-                            className={`menu-item ${getActiveClass(
-                              isHomeActive,
-                            )}`}
-                          >
-                            <AiFillHome
-                              className={`menu-icon ${
-                                isHomeActive ? 'active-icon' : ''
-                              }`}
-                            />
-                            <p
-                              className={`menu-text ${
-                                isDarkTheme
-                                  ? 'menu-text-dark'
-                                  : 'menu-text-light'
-                              }`}
-                            >
-                              Home
-                            </p>
-                          </li>
-                        </Link>
-
-                        <Link to="/trending" className="menu-link">
-                          <li
-                            className={`menu-item ${getActiveClass(
-                              isTrendingActive,
-                            )}`}
-                          >
-                            <HiFire
-                              className={`menu-icon ${
-                                isTrendingActive ? 'active-icon' : ''
-                              }`}
-                            />
-                            <p
-                              className={`menu-text ${
-                                isDarkTheme
-                                  ? 'menu-text-dark'
-                                  : 'menu-text-light'
-                              }`}
-                            >
-                              Trending
-                            </p>
-                          </li>
-                        </Link>
-
-                        <Link to="/gaming" className="menu-link">
-                          <li
-                            className={`menu-item ${getActiveClass(
-                              isGamingActive,
-                            )}`}
-                          >
-                            <SiYoutubegaming
-                              className={`menu-icon ${
-                                isGamingActive ? 'active-icon' : ''
-                              }`}
-                            />
-                            <p
-                              className={`menu-text ${
-                                isDarkTheme
-                                  ? 'menu-text-dark'
-                                  : 'menu-text-light'
-                              }`}
-                            >
-                              Gaming
-                            </p>
-                          </li>
-                        </Link>
-
-                        <Link to="/saved-videos" className="menu-link">
-                          <li
-                            className={`menu-item ${getActiveClass(
-                              isSavedVideosActive,
-                            )}`}
-                          >
-                            <CgPlayListAdd
-                              className={`menu-icon ${
-                                isSavedVideosActive ? 'active-icon' : ''
-                              }`}
-                            />
-                            <p
-                              className={`menu-text ${
-                                isDarkTheme
-                                  ? 'menu-text-dark'
-                                  : 'menu-text-light'
-                              }`}
-                            >
-                              Saved Videos
-                            </p>
-                          </li>
-                        </Link>
-                      </ul>
-                    </div>
-                  )}
-                </Popup>
-
-                <Popup
-                  modal
-                  trigger={
-                    <button type="button" className="control-btn">
-                      <FiLogOut
-                        className={`icons ${
-                          isDarkTheme ? 'dark-icons' : 'light-icons'
-                        }`}
-                      />
-                    </button>
-                  }
-                  className="popup-content"
-                >
-                  {close => (
-                    <div
-                      className={`logout-popup-container ${
-                        isDarkTheme
-                          ? 'logout-popup-container-dark'
-                          : 'logout-popup-container-light'
-                      }`}
+                      }
+                      className="popup-content"
                     >
-                      <p
-                        className={`logout-description ${
-                          isDarkTheme
-                            ? 'logout-description-dark'
-                            : 'logout-description-light'
-                        }`}
-                      >
-                        Are you sure you want to logout?
-                      </p>
-
-                      <div className="logout-button-container">
-                        <button
-                          type="button"
-                          className="logout-button cancel-btn"
-                          onClick={() => close()}
+                      {close => (
+                        <div
+                          className={`menu-popup-container ${
+                            isDarkTheme
+                              ? 'menu-popup-container-dark'
+                              : 'menu-popup-container-light'
+                          }`}
                         >
-                          Cancel
-                        </button>
+                          <div className="menu-close-container">
+                            <button
+                              type="button"
+                              className={`menu-close-button ${
+                                isDarkTheme
+                                  ? 'menu-close-button-dark'
+                                  : 'menu-close-button-light'
+                              }`}
+                              onClick={() => close()}
+                            >
+                              <IoMdClose
+                                className={`icons ${
+                                  isDarkTheme ? 'dark-icons' : 'light-icons'
+                                }`}
+                              />
+                            </button>
+                          </div>
 
-                        <button
-                          type="button"
-                          className="logout-button confirm-btn"
-                          onClick={onClickLogout}
-                        >
-                          Confirm
+                          <ul className="menu-list">
+                            <Link to="/" className="menu-link">
+                              <li
+                                className={`menu-item ${getActiveClass(
+                                  isHomeActive,
+                                )}`}
+                              >
+                                <AiFillHome
+                                  className={`menu-icon ${
+                                    isHomeActive ? 'active-icon' : ''
+                                  }`}
+                                />
+                                <p
+                                  className={`menu-text ${
+                                    isDarkTheme
+                                      ? 'menu-text-dark'
+                                      : 'menu-text-light'
+                                  }`}
+                                >
+                                  Home
+                                </p>
+                              </li>
+                            </Link>
+
+                            <Link to="/trending" className="menu-link">
+                              <li
+                                className={`menu-item ${getActiveClass(
+                                  isTrendingActive,
+                                )}`}
+                              >
+                                <HiFire
+                                  className={`menu-icon ${
+                                    isTrendingActive ? 'active-icon' : ''
+                                  }`}
+                                />
+                                <p
+                                  className={`menu-text ${
+                                    isDarkTheme
+                                      ? 'menu-text-dark'
+                                      : 'menu-text-light'
+                                  }`}
+                                >
+                                  Trending
+                                </p>
+                              </li>
+                            </Link>
+
+                            <Link to="/gaming" className="menu-link">
+                              <li
+                                className={`menu-item ${getActiveClass(
+                                  isGamingActive,
+                                )}`}
+                              >
+                                <SiYoutubegaming
+                                  className={`menu-icon ${
+                                    isGamingActive ? 'active-icon' : ''
+                                  }`}
+                                />
+                                <p
+                                  className={`menu-text ${
+                                    isDarkTheme
+                                      ? 'menu-text-dark'
+                                      : 'menu-text-light'
+                                  }`}
+                                >
+                                  Gaming
+                                </p>
+                              </li>
+                            </Link>
+
+                            <Link to="/saved-videos" className="menu-link">
+                              <li
+                                className={`menu-item ${getActiveClass(
+                                  isSavedVideosActive,
+                                )}`}
+                              >
+                                <CgPlayListAdd
+                                  className={`menu-icon ${
+                                    isSavedVideosActive ? 'active-icon' : ''
+                                  }`}
+                                />
+                                <p
+                                  className={`menu-text ${
+                                    isDarkTheme
+                                      ? 'menu-text-dark'
+                                      : 'menu-text-light'
+                                  }`}
+                                >
+                                  Saved Videos
+                                </p>
+                              </li>
+                            </Link>
+                          </ul>
+                        </div>
+                      )}
+                    </Popup>
+                  </div>
+                </div>
+
+                {/* Logout Pop Up */}
+
+                <div>
+                  <div className="md-logout-button">
+                    <button
+                      type="button"
+                      className={`desktop-logout-btn ${
+                        isDarkTheme
+                          ? 'desktop-logout-btn-dark'
+                          : 'desktop-logout-btn-light'
+                      }`}
+                      onClick={onClickLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+
+                  <div className="sm-logout-icon">
+                    <Popup
+                      modal
+                      trigger={
+                        <button type="button" className="control-btn">
+                          <FiLogOut
+                            className={`icons ${
+                              isDarkTheme ? 'dark-icons' : 'light-icons'
+                            }`}
+                          />
                         </button>
-                      </div>
-                    </div>
-                  )}
-                </Popup>
+                      }
+                      className="popup-content"
+                    >
+                      {close => (
+                        <div
+                          className={`logout-popup-container ${
+                            isDarkTheme
+                              ? 'logout-popup-container-dark'
+                              : 'logout-popup-container-light'
+                          }`}
+                        >
+                          <p
+                            className={`logout-description ${
+                              isDarkTheme
+                                ? 'logout-description-dark'
+                                : 'logout-description-light'
+                            }`}
+                          >
+                            Are you sure you want to logout?
+                          </p>
+
+                          <div className="logout-button-container">
+                            <button
+                              type="button"
+                              className="logout-button cancel-btn"
+                              onClick={() => close()}
+                            >
+                              Cancel
+                            </button>
+
+                            <button
+                              type="button"
+                              className="logout-button confirm-btn"
+                              onClick={onClickLogout}
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </Popup>
+                  </div>
+                </div>
               </div>
             </div>
           )
