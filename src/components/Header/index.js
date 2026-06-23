@@ -65,25 +65,68 @@ class Header extends Component {
             return 'active-menu-light'
           }
 
+          const renderLogoutPopup = trigger => (
+            <Popup modal trigger={trigger} className="popup-content">
+              {close => (
+                <div
+                  className={`logout-popup-container ${
+                    isDarkTheme
+                      ? 'logout-popup-container-dark'
+                      : 'logout-popup-container-light'
+                  }`}
+                >
+                  <p
+                    className={`logout-description ${
+                      isDarkTheme
+                        ? 'logout-description-dark'
+                        : 'logout-description-light'
+                    }`}
+                  >
+                    Are you sure you want to logout?
+                  </p>
+
+                  <div className="logout-button-container">
+                    <button
+                      type="button"
+                      className="logout-button cancel-btn"
+                      onClick={() => close()}
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      type="button"
+                      className="logout-button confirm-btn"
+                      onClick={onClickLogout}
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Popup>
+          )
+
           return (
             <div
               className={`header-container ${
                 isDarkTheme ? 'dark-header-container' : 'light-header-container'
               }`}
             >
-              <div>
+              <Link to="/">
                 <img
                   src={websiteLogo}
                   alt="website logo"
                   className="website-logo-header"
                 />
-              </div>
+              </Link>
 
               <div className="control-button-container">
                 <button
                   type="button"
                   className="control-btn"
                   onClick={onClickToggleTheme}
+                  data-testid="theme"
                 >
                   {themeIcon}
                 </button>
@@ -111,7 +154,7 @@ class Header extends Component {
                           />
                         </button>
                       }
-                      className="popup-content"
+                      className="menu-popup"
                     >
                       {close => (
                         <div
@@ -242,71 +285,30 @@ class Header extends Component {
 
                 <div>
                   <div className="md-logout-button">
-                    <button
-                      type="button"
-                      className={`desktop-logout-btn ${
-                        isDarkTheme
-                          ? 'desktop-logout-btn-dark'
-                          : 'desktop-logout-btn-light'
-                      }`}
-                      onClick={onClickLogout}
-                    >
-                      Logout
-                    </button>
+                    {renderLogoutPopup(
+                      <button
+                        type="button"
+                        className={`desktop-logout-btn ${
+                          isDarkTheme
+                            ? 'desktop-logout-btn-dark'
+                            : 'desktop-logout-btn-light'
+                        }`}
+                      >
+                        Logout
+                      </button>,
+                    )}
                   </div>
 
                   <div className="sm-logout-icon">
-                    <Popup
-                      modal
-                      trigger={
-                        <button type="button" className="control-btn">
-                          <FiLogOut
-                            className={`icons ${
-                              isDarkTheme ? 'dark-icons' : 'light-icons'
-                            }`}
-                          />
-                        </button>
-                      }
-                      className="popup-content"
-                    >
-                      {close => (
-                        <div
-                          className={`logout-popup-container ${
-                            isDarkTheme
-                              ? 'logout-popup-container-dark'
-                              : 'logout-popup-container-light'
+                    {renderLogoutPopup(
+                      <button type="button" className="control-btn">
+                        <FiLogOut
+                          className={`icons ${
+                            isDarkTheme ? 'dark-icons' : 'light-icons'
                           }`}
-                        >
-                          <p
-                            className={`logout-description ${
-                              isDarkTheme
-                                ? 'logout-description-dark'
-                                : 'logout-description-light'
-                            }`}
-                          >
-                            Are you sure you want to logout?
-                          </p>
-
-                          <div className="logout-button-container">
-                            <button
-                              type="button"
-                              className="logout-button cancel-btn"
-                              onClick={() => close()}
-                            >
-                              Cancel
-                            </button>
-
-                            <button
-                              type="button"
-                              className="logout-button confirm-btn"
-                              onClick={onClickLogout}
-                            >
-                              Confirm
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </Popup>
+                        />
+                      </button>,
+                    )}
                   </div>
                 </div>
               </div>

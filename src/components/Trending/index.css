@@ -1,0 +1,160 @@
+/* Trending Container */
+.trending-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.trending-container-dark {
+  background-color: #181818;
+}
+
+.trending-container-light {
+  background-color: #ffffff;
+}
+
+/* Trending Content Container */
+.trending-content-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Loader Container */
+.loader-container {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Trending Videos Container */
+.trending-videos-container {
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.trending-videos-headers {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 10px;
+}
+
+.trending-videos-headers-dark {
+  background-color: #181818;
+}
+
+.trending-videos-headers-light {
+  background-color: #f1f1f1;
+}
+
+.trending-icon-container {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.trending-icon-container-dark {
+  background-color: #0f0f0f;
+}
+
+.trending-icon-container-light {
+  background-color: #e1e9f0;
+}
+
+.trending-icon {
+  font-size: 30px;
+  color: #ff031c;
+}
+
+.trending-heading {
+  font-size: 20px;
+}
+
+.trending-heading-dark {
+  color: #ffffff;
+}
+
+.trending-heading-light {
+  color: #20293c;
+}
+
+.trending-videos-content-container {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.trending-videos-content-container-dark {
+  background-color: #0f0f0f;
+}
+
+.trending-videos-content-container-light {
+  background-color: #f9f9f9;
+}
+
+/* Failure View Container*/
+.trending-failure-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.trending-failure-image {
+  width: 250px;
+  margin-bottom: 24px;
+}
+
+.trending-failure-heading {
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.trending-failure-heading-light {
+  color: #181818;
+}
+
+.trending-failure-heading-dark {
+  color: #ffffff;
+}
+
+.trending-failure-description {
+  font-family: 'Roboto';
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+  max-width: 320px;
+}
+
+.trending-failure-description-light {
+  color: #475569;
+}
+
+.trending-failure-description-dark {
+  color: #94a3b8;
+}
+
+.retry-button {
+  width: 90px;
+  height: 40px;
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}

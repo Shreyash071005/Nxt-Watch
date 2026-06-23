@@ -1,0 +1,233 @@
+/* Home Container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Home Content Container */
+.home-content-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Banner Container */
+.banner-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.banner-close-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.close-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 380px;
+}
+
+.nxt-watch-logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.banner-description {
+  color: #1e293b;
+  font-family: 'Roboto';
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.banner-button {
+  width: 120px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #1e293b;
+  color: #1e293b;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Loader Container */
+.loader-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Video Content */
+.video-content {
+  flex: 1;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* Home Videos Container */
+.home-videos-container {
+  padding: 20px;
+}
+
+.home-videos-container-dark {
+  background-color: #181818;
+}
+
+.home-videos-container-light {
+  background-color: #ffffff;
+}
+
+/* Search Section */
+
+.search-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.search-input {
+  flex-grow: 1;
+  height: 30px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-family: 'Roboto';
+  outline: none;
+}
+
+.search-input-light {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-right: none;
+  color: #181818;
+}
+
+.search-input-dark {
+  background-color: #181818;
+  border: 1px solid #475569;
+  border-right: none;
+  color: #ffffff;
+}
+
+.search-input-dark::placeholder {
+  color: #64748b;
+}
+
+.search-button {
+  width: 70px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.search-button-light {
+  background-color: #f4f4f4;
+  border: 1px solid #cbd5e1;
+}
+
+.search-button-dark {
+  background-color: #313131;
+  border: 1px solid #475569;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #64748b;
+}
+
+@media screen and (min-width: 768px) {
+  .search-container {
+    width: 450px;
+  }
+}
+
+/* No Result Found  and Failure*/
+.failure-container,
+.no-results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.failure-image,
+.no-results-image {
+  width: 250px;
+  margin-bottom: 24px;
+}
+
+.failure-heading,
+.no-results-heading {
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.failure-heading-light,
+.no-results-heading-light {
+  color: #181818;
+}
+
+.failure-heading-dark,
+.no-results-heading-dark {
+  color: #ffffff;
+}
+
+.no-results-description,
+.failure-description {
+  font-family: 'Roboto';
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+  max-width: 320px;
+}
+
+.failure-description-light,
+.no-results-description-light {
+  color: #475569;
+}
+
+.failure-description-dark,
+.no-results-description-dark {
+  color: #94a3b8;
+}
+
+.retry-button {
+  width: 90px;
+  height: 40px;
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
