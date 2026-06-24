@@ -1,54 +1,67 @@
-import {Link} from 'react-router-dom'
 import {formatDistanceToNowStrict} from 'date-fns'
-import './index.css'
+
+import {
+  VideosCardsContainer,
+  LinkContainer,
+  VideoCard,
+  VideoThumbnail,
+  VideoDetails,
+  ChannelLogo,
+  VideoCardContent,
+  VideoTitle,
+  ChannelDetailsContainer,
+  ChannelName,
+  VideoMetaData,
+  Dot,
+} from './styledComponents'
 
 const VideoCards = props => {
   const {videoList, isDarkTheme} = props
+
   return (
-    <ul className="videos-cards-container">
+    <VideosCardsContainer>
       {videoList.map(eachVideo => (
-        <li key={eachVideo.id} className="video-card">
-          <Link to={`/videos/${eachVideo.id}`} className="link-container">
-            <img
+        <VideoCard key={eachVideo.id}>
+          <LinkContainer to={`/videos/${eachVideo.id}`}>
+            <VideoThumbnail
               src={eachVideo.thumbnailUrl}
               alt="video thumbnail"
-              className="video-thumbnail"
             />
-            <div className="video-details">
-              <img
+
+            <VideoDetails>
+              <ChannelLogo
                 src={eachVideo.channel.profileImageUrl}
                 alt="channel logo"
-                className="channel-logo"
               />
 
-              <div className="video-card-content">
-                <p
-                  className={`video-title ${
-                    isDarkTheme ? 'video-title-dark' : 'video-title-light'
-                  }`}
-                >
+              <VideoCardContent>
+                <VideoTitle isDarkTheme={isDarkTheme}>
                   {eachVideo.title}
-                </p>
+                </VideoTitle>
 
-                <div className="channel-details-container">
-                  <p className="channel-name">{eachVideo.channel.name}</p>
-                  <div className="video-meta-data">
-                    <span className="dot">•</span>
+                <ChannelDetailsContainer>
+                  <ChannelName>{eachVideo.channel.name}</ChannelName>
+
+                  <VideoMetaData>
+                    <Dot>•</Dot>
+
                     <p>{eachVideo.viewCount} views</p>
-                    <span className="dot">•</span>
+
+                    <Dot>•</Dot>
+
                     <p>
                       {formatDistanceToNowStrict(
                         new Date(eachVideo.publishedAt),
                       )}
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </li>
+                  </VideoMetaData>
+                </ChannelDetailsContainer>
+              </VideoCardContent>
+            </VideoDetails>
+          </LinkContainer>
+        </VideoCard>
       ))}
-    </ul>
+    </VideosCardsContainer>
   )
 }
 

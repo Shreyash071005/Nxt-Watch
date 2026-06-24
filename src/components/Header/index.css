@@ -10,11 +10,11 @@
 }
 
 .light-header-container {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 
 .dark-header-container {
-  background-color: #212121;
+  background-color: #212121 !important;
 }
 
 .website-logo-header {

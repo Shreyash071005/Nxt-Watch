@@ -2,7 +2,20 @@ import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import ThemeContext from '../../Context/ThemeContext'
-import './index.css'
+import {
+  LoginContainer,
+  LoginFormContainer,
+  WebsiteLogo,
+  LoginForm,
+  InputContainer,
+  LoginLabel,
+  LoginInput,
+  ShowPasswordContainer,
+  Checkbox,
+  ShowPasswordLabel,
+  LoginButton,
+  ErrorMessage,
+} from './styledComponents'
 
 class Login extends Component {
   state = {
@@ -69,96 +82,61 @@ class Login extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
-          const loginContainerTheme = isDarkTheme
-            ? 'login-container-dark'
-            : 'login-container-light'
-
           return (
-            <div className={`login-container ${loginContainerTheme}`}>
-              <div
-                className={`login-form-container ${
-                  isDarkTheme
-                    ? 'login-form-container-dark'
-                    : 'login-form-container-light'
-                }`}
-              >
-                <img
-                  src={websiteLogo}
-                  alt="website logo"
-                  className="website-logo"
-                />
+            <LoginContainer isDark={isDarkTheme}>
+              <LoginFormContainer isDark={isDarkTheme}>
+                <WebsiteLogo src={websiteLogo} alt="website logo" />
 
-                <form className="login-form" onSubmit={this.onShubmitForm}>
-                  <div className="input-container">
-                    <label
-                      htmlFor="username"
-                      className={`login-label ${
-                        isDarkTheme ? 'login-label-dark' : 'login-label-light'
-                      }`}
-                    >
+                <LoginForm onSubmit={this.onShubmitForm}>
+                  <InputContainer>
+                    <LoginLabel htmlFor="username" isDark={isDarkTheme}>
                       USERNAME
-                    </label>
-                    <input
+                    </LoginLabel>
+                    <LoginInput
                       type="text"
                       id="username"
                       placeholder="Username"
                       value={username}
                       onChange={this.onChnageUsername}
-                      className={`login-input ${
-                        isDarkTheme ? 'login-input-dark' : 'login-input-light'
-                      }`}
+                      isDark={isDarkTheme}
                       autoComplete="off"
                     />
-                  </div>
+                  </InputContainer>
 
-                  <div className="input-container">
-                    <label
-                      htmlFor="password"
-                      className={`login-label ${
-                        isDarkTheme ? 'login-label-dark' : 'login-label-light'
-                      }`}
-                    >
+                  <InputContainer>
+                    <LoginLabel htmlFor="password" isDark={isDarkTheme}>
                       PASSWORD
-                    </label>
-                    <input
+                    </LoginLabel>
+                    <LoginInput
                       type={showPassword ? 'text' : 'password'}
                       id="password"
                       placeholder="Password"
                       value={password}
                       onChange={this.onChnagePassword}
-                      className={`login-input ${
-                        isDarkTheme ? 'login-input-dark' : 'login-input-light'
-                      }`}
+                      isDark={isDarkTheme}
                     />
-                  </div>
+                  </InputContainer>
 
-                  <div className="show-password-container">
-                    <input
+                  <ShowPasswordContainer>
+                    <Checkbox
                       type="checkbox"
                       id="showPassword"
-                      className="checkbox"
                       onChange={this.onChangeShowPassword}
                     />
-                    <label
+                    <ShowPasswordLabel
                       htmlFor="showPassword"
-                      className={`show-password-label ${
-                        isDarkTheme
-                          ? 'show-password-label-dark'
-                          : 'show-password-label-light'
-                      }`}
+                      isDark={isDarkTheme}
                     >
                       Show Password
-                    </label>
-                  </div>
+                    </ShowPasswordLabel>
+                  </ShowPasswordContainer>
 
-                  <button type="submit" className="login-button">
-                    Login
-                  </button>
+                  <LoginButton type="submit">Login</LoginButton>
 
-                  {showError && <p className="error-message">* {errorMsg}</p>}
-                </form>
-              </div>
-            </div>
+                  {showError && <ErrorMessage>* {errorMsg}</ErrorMessage>}
+                </LoginForm>
+              </LoginFormContainer>
+            </LoginContainer>
           )
         }}
       </ThemeContext.Consumer>

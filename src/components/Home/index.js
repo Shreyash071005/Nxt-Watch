@@ -7,7 +7,30 @@ import VideoCards from '../VideoCards'
 import ThemeContext from '../../Context/ThemeContext'
 import Header from '../Header'
 import Sidebar from '../Sidebar'
-import './index.css'
+import {
+  HomeContainer,
+  HomeContentContainer,
+  BannerContainer,
+  BannerCloseContainer,
+  CloseBtn,
+  CloseIcon,
+  BannerContent,
+  NxtWatchLogo,
+  BannerDescription,
+  BannerButton,
+  LoaderContainer,
+  VideoContent,
+  HomeVideosContainer,
+  SearchContainer,
+  SearchInput,
+  SearchButton,
+  SearchIcon,
+  StatusContainer,
+  StatusImage,
+  StatusHeading,
+  StatusDescription,
+  RetryButton,
+} from './styledComponents'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -78,101 +101,69 @@ class Home extends Component {
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
+    <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#3b82f6" height="50" width="50" />
-    </div>
+    </LoaderContainer>
   )
 
-  renderFailureView = isDarkTheme => (
-    <div className="failure-container">
-      <img
+  renderFailureView = isDark => (
+    <StatusContainer>
+      <StatusImage
         src={
-          isDarkTheme
+          isDark
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         }
         alt="failure view"
-        className="failure-image"
       />
-      <h1
-        className={`failure-heading ${
-          isDarkTheme ? 'failure-heading-dark' : 'failure-heading-light'
-        }`}
-      >
-        Oops! Something Went Wrong
-      </h1>
-      <p
-        className={`failure-description ${
-          isDarkTheme ? 'failure-description-dark' : 'failure-description-light'
-        }`}
-      >
+      <StatusHeading isDark={isDark}>Oops! Something Went Wrong</StatusHeading>
+      <StatusDescription isDark={isDark}>
         We are having some trouble
-      </p>
-      <button
-        type="button"
-        className="retry-button"
-        onClick={() => this.fetchHomeVideos()}
-      >
+      </StatusDescription>
+      <RetryButton type="button" onClick={() => this.fetchHomeVideos()}>
         Retry
-      </button>
-    </div>
+      </RetryButton>
+    </StatusContainer>
   )
 
-  noSearchResultView = isDarkTheme => (
-    <div className="no-results-container">
-      <img
+  noSearchResultView = isDark => (
+    <StatusContainer>
+      <StatusImage
         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
         alt="no videos"
-        className="no-results-image"
       />
-      <h1
-        className={`no-results-heading ${
-          isDarkTheme ? 'no-results-heading-dark' : 'no-results-heading-light'
-        }`}
-      >
-        No Search results found
-      </h1>
-      <p
-        className={`no-results-description ${
-          isDarkTheme
-            ? 'no-results-description-dark'
-            : 'no-results-description-light'
-        }`}
-      >
+      <StatusHeading isDark={isDark}>No Search results found</StatusHeading>
+      <StatusDescription isDark={isDark}>
         Try different key words or remove search filter
-      </p>
-      <button
-        type="button"
-        className="retry-button"
-        onClick={() => this.fetchHomeVideos()}
-      >
+      </StatusDescription>
+      <RetryButton type="button" onClick={() => this.fetchHomeVideos()}>
         Retry
-      </button>
-    </div>
+      </RetryButton>
+    </StatusContainer>
   )
 
-  renderSuccessView = isDarkTheme => {
+  renderSuccessView = isDark => {
     const {videosList} = this.state
 
     if (videosList.length === 0) {
-      return this.noSearchResultView(isDarkTheme)
+      return this.noSearchResultView(isDark)
     }
 
-    return <VideoCards videoList={videosList} isDarkTheme={isDarkTheme} />
+    return <VideoCards videoList={videosList} isDarkTheme={isDark} />
   }
 
-  renderHomeContent = isDarkTheme => {
+  renderHomeContent = isDark => {
     const {apiStatus} = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.inProgress:
-        return this.renderLoaderView(isDarkTheme)
+        return this.renderLoaderView()
 
       case apiStatusConstants.failure:
-        return this.renderFailureView(isDarkTheme)
+        return this.renderFailureView(isDark)
 
       case apiStatusConstants.success:
-        return this.renderSuccessView(isDarkTheme)
+        return this.renderSuccessView(isDark)
 
       default:
         return null
@@ -187,86 +178,67 @@ class Home extends Component {
           const {isDarkTheme} = value
 
           return (
-            <div className="home-container">
+            <HomeContainer isDark={isDarkTheme} data-testid="home">
               <Header />
 
-              <div className="home-content-container">
+              <HomeContentContainer>
                 <Sidebar />
 
-                <div className="video-content">
+                <VideoContent>
                   {showBanner && (
-                    <div className="banner-container" data-testid="banner">
-                      <div className="banner-close-container">
-                        <button
+                    <BannerContainer data-testid="banner">
+                      <BannerCloseContainer>
+                        <CloseBtn
                           type="button"
-                          className="close-btn"
+                          onClick={this.onClickCloseBanner}
                           data-testid="close"
                         >
-                          <IoMdClose
-                            className="close-icon"
-                            onClick={this.onClickCloseBanner}
-                          />
-                        </button>
-                      </div>
+                          <CloseIcon>
+                            <IoMdClose />
+                          </CloseIcon>
+                        </CloseBtn>
+                      </BannerCloseContainer>
 
-                      <div className="banner-content">
-                        <img
+                      <BannerContent>
+                        <NxtWatchLogo
                           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
                           alt="nxt watch logo"
-                          className="nxt-watch-logo"
                         />
-
-                        <p className="banner-description">
+                        <BannerDescription>
                           Buy Nxt Watch Premium prepaid plans with UPI
-                        </p>
-
-                        <button type="button" className="banner-button">
-                          GET IT NOW
-                        </button>
-                      </div>
-                    </div>
+                        </BannerDescription>
+                        <BannerButton type="button">GET IT NOW</BannerButton>
+                      </BannerContent>
+                    </BannerContainer>
                   )}
 
-                  <div
-                    className={`home-videos-container ${
-                      isDarkTheme
-                        ? 'home-videos-container-dark'
-                        : 'home-videos-container-light'
-                    }`}
-                    data-testid="home"
-                  >
-                    <div className="search-container">
-                      <input
+                  <HomeVideosContainer>
+                    <SearchContainer>
+                      <SearchInput
                         type="search"
                         placeholder="Search"
-                        className={`search-input ${
-                          isDarkTheme
-                            ? 'search-input-dark'
-                            : 'search-input-light'
-                        }`}
+                        isDark={isDarkTheme}
                         value={searchValue}
                         onChange={this.onChangeSearch}
-                        data-testid="searchButton"
                       />
 
-                      <button
-                        className={`search-button ${
-                          isDarkTheme
-                            ? 'search-button-dark'
-                            : 'search-button-light'
-                        }`}
+                      <SearchButton
+                        isDark={isDarkTheme}
                         type="button"
                         onClick={this.onClickSearchBtn}
+                        data-testid="searchButton"
                       >
-                        <IoSearchOutline className="search-icon" />
-                      </button>
-                    </div>
+                        <SearchIcon>
+                          <IoSearchOutline />
+                        </SearchIcon>
+                      </SearchButton>
+                    </SearchContainer>
 
                     {this.renderHomeContent(isDarkTheme)}
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </HomeVideosContainer>
+                </VideoContent>
+              </HomeContentContainer>
+            </HomeContainer>
           )
         }}
       </ThemeContext.Consumer>

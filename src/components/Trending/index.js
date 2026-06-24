@@ -1,12 +1,26 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {HiFire} from 'react-icons/hi'
 import ThemeContext from '../../Context/ThemeContext'
 import Header from '../Header'
 import Sidebar from '../Sidebar'
 import VideoCards from '../VideoCards'
-import './index.css'
+import {
+  TrendingContainer,
+  TrendingContentContainer,
+  TrendingVideosContainer,
+  TrendingVideosHeader,
+  TrendingIconContainer,
+  TrendingHeading,
+  TrendingVideosContentContainer,
+  LoaderContainer,
+  FailureContainer,
+  FailureImage,
+  FailureHeading,
+  FailureDescription,
+  RetryButton,
+  TrendingIcon,
+} from './styledComponents'
 
 const apiStatusConstantValue = {
   initial: 'INITIAL',
@@ -59,87 +73,51 @@ class Trending extends Component {
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
+    <LoaderContainer data-testid="loader">
       <Loader type="ThreeDots" color="#3b82f6" height="50" width="50" />
-    </div>
+    </LoaderContainer>
   )
 
   renderFailureView = isDarkTheme => (
-    <div className="trending-failure-container">
-      <img
+    <FailureContainer>
+      <FailureImage
         src={
           isDarkTheme
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         }
         alt="failure view"
-        className="trending-failure-image"
       />
-      <h1
-        className={`failure-heading ${
-          isDarkTheme
-            ? 'trending-failure-heading-dark'
-            : 'trending-failure-heading-light'
-        }`}
-      >
+
+      <FailureHeading isDarkTheme={isDarkTheme}>
         Oops! Something Went Wrong
-      </h1>
-      <p
-        className={`failure-description ${
-          isDarkTheme
-            ? 'trending-failure-description-dark'
-            : 'trending-failure-description-light'
-        }`}
-      >
+      </FailureHeading>
+
+      <FailureDescription isDarkTheme={isDarkTheme}>
         We are having some trouble
-      </p>
-      <button
-        type="button"
-        className="retry-button"
-        onClick={() => this.fetchTrendingvideoList()}
-      >
+      </FailureDescription>
+
+      <RetryButton type="button" onClick={this.fetchTrendingvideoList}>
         Retry
-      </button>
-    </div>
+      </RetryButton>
+    </FailureContainer>
   )
 
   renderSuccessView = isDarkTheme => {
     const {trendingVideoList} = this.state
     return (
       <>
-        <div
-          className={`trending-videos-headers ${
-            isDarkTheme
-              ? 'trending-videos-headers-dark'
-              : 'trending-videos-headers-ligth'
-          }`}
-        >
-          <div
-            className={`trending-icon-container ${
-              isDarkTheme
-                ? 'trending-icon-container-dark'
-                : 'trending-icon-container-light'
-            }`}
-          >
-            <HiFire className="trending-icon" />
-          </div>
-          <h1
-            className={`trending-heading ${
-              isDarkTheme ? 'trending-heading-dark' : 'trending-heading-light'
-            }`}
-          >
-            Trending
-          </h1>
-        </div>
-        <div
-          className={`trending-videos-content-container ${
-            isDarkTheme
-              ? 'trending-videos-content-container-dark'
-              : 'trending-videos-content-container-ligth'
-          }`}
-        >
+        <TrendingVideosHeader isDarkTheme={isDarkTheme}>
+          <TrendingIconContainer isDarkTheme={isDarkTheme}>
+            <TrendingIcon />
+          </TrendingIconContainer>
+
+          <TrendingHeading isDarkTheme={isDarkTheme}>Trending</TrendingHeading>
+        </TrendingVideosHeader>
+
+        <TrendingVideosContentContainer isDarkTheme={isDarkTheme}>
           <VideoCards videoList={trendingVideoList} isDarkTheme={isDarkTheme} />
-        </div>
+        </TrendingVideosContentContainer>
       </>
     )
   }
@@ -166,23 +144,17 @@ class Trending extends Component {
           const {isDarkTheme} = value
 
           return (
-            <div
-              className={`trending-container ${
-                isDarkTheme
-                  ? 'trending-container-dark'
-                  : 'trending-container-ligth'
-              }`}
-            >
+            <TrendingContainer isDarkTheme={isDarkTheme} data-testid="trending">
               <Header />
 
-              <div className="trending-content-container">
+              <TrendingContentContainer>
                 <Sidebar />
 
-                <div className="trending-videos-container">
+                <TrendingVideosContainer>
                   {this.renderTrendingViewContainer(isDarkTheme)}
-                </div>
-              </div>
-            </div>
+                </TrendingVideosContainer>
+              </TrendingContentContainer>
+            </TrendingContainer>
           )
         }}
       </ThemeContext.Consumer>

@@ -7,23 +7,23 @@
 }
 
 .trending-container-dark {
-  background-color: #181818;
+  background-color: #0f0f0f;
 }
 
 .trending-container-light {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
 }
 
 /* Trending Content Container */
 .trending-content-container {
   display: flex;
+  align-items: flex-start;
   flex: 1;
   overflow: hidden;
 }
 
 /* Loader Container */
 .loader-container {
-  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   justify-content: center;

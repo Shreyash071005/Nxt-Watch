@@ -6,6 +6,14 @@
   overflow: hidden;
 }
 
+.home-container-dark {
+  background-color: #181818;
+}
+
+.home-container-light {
+  background-color: #f9f9f9;
+}
+
 /* Home Content Container */
 .home-content-container {
   display: flex;
@@ -75,7 +83,7 @@
 
 /* Loader Container */
 .loader-container {
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,14 +100,6 @@
 /* Home Videos Container */
 .home-videos-container {
   padding: 20px;
-}
-
-.home-videos-container-dark {
-  background-color: #181818;
-}
-
-.home-videos-container-light {
-  background-color: #ffffff;
 }
 
 /* Search Section */

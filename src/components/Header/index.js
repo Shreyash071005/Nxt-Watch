@@ -12,7 +12,31 @@ import {withRouter, Link} from 'react-router-dom'
 import Popup from 'reactjs-popup'
 import Cookies from 'js-cookie'
 import ThemeContext from '../../Context/ThemeContext'
-import './index.css'
+import {
+  GlobalStyle,
+  HeaderContainer,
+  WebsiteLogo,
+  ControlButtonContainer,
+  ControlBtn,
+  StyledIcon,
+  ProfileIcon,
+  DesktopLogoutBtn,
+  MenuPopupContainer,
+  MenuCloseContainer,
+  MenuCloseButton,
+  MenuList,
+  MenuLink,
+  MenuItem,
+  MenuIconWrapper,
+  MenuText,
+  LogoutPopupContainer,
+  LogoutDescription,
+  LogoutButtonContainer,
+  CancelBtn,
+  ConfirmBtn,
+  SmOnly,
+  MdOnly,
+} from './styledComponents'
 
 class Header extends Component {
   render() {
@@ -35,16 +59,6 @@ class Header extends Component {
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
-          const themeIcon = isDarkTheme ? (
-            <IoSunnyOutline
-              className={`icons ${isDarkTheme ? 'dark-icons' : 'light-icons'}`}
-            />
-          ) : (
-            <FaMoon
-              className={`icons ${isDarkTheme ? 'dark-icons' : 'light-icons'}`}
-            />
-          )
-
           const {location} = this.props
           const {pathname} = location
 
@@ -53,266 +67,181 @@ class Header extends Component {
           const isGamingActive = pathname === '/gaming'
           const isSavedVideosActive = pathname === '/saved-videos'
 
-          const getActiveClass = isActive => {
-            if (!isActive) {
-              return ''
-            }
-
-            if (isDarkTheme) {
-              return 'active-menu-dark'
-            }
-
-            return 'active-menu-light'
-          }
-
           const renderLogoutPopup = trigger => (
             <Popup modal trigger={trigger} className="popup-content">
               {close => (
-                <div
-                  className={`logout-popup-container ${
-                    isDarkTheme
-                      ? 'logout-popup-container-dark'
-                      : 'logout-popup-container-light'
-                  }`}
-                >
-                  <p
-                    className={`logout-description ${
-                      isDarkTheme
-                        ? 'logout-description-dark'
-                        : 'logout-description-light'
-                    }`}
-                  >
-                    Are you sure you want to logout?
-                  </p>
+                <LogoutPopupContainer isDark={isDarkTheme}>
+                  <LogoutDescription isDark={isDarkTheme}>
+                    Are you sure, you want to logout?
+                  </LogoutDescription>
 
-                  <div className="logout-button-container">
-                    <button
+                  <LogoutButtonContainer>
+                    <CancelBtn
                       type="button"
                       className="logout-button cancel-btn"
                       onClick={() => close()}
                     >
                       Cancel
-                    </button>
+                    </CancelBtn>
 
-                    <button
+                    <ConfirmBtn
                       type="button"
                       className="logout-button confirm-btn"
                       onClick={onClickLogout}
                     >
                       Confirm
-                    </button>
-                  </div>
-                </div>
+                    </ConfirmBtn>
+                  </LogoutButtonContainer>
+                </LogoutPopupContainer>
               )}
             </Popup>
           )
 
           return (
-            <div
-              className={`header-container ${
-                isDarkTheme ? 'dark-header-container' : 'light-header-container'
-              }`}
-            >
-              <Link to="/">
-                <img
-                  src={websiteLogo}
-                  alt="website logo"
-                  className="website-logo-header"
-                />
-              </Link>
+            <>
+              <GlobalStyle />
+              <HeaderContainer isDark={isDarkTheme}>
+                <Link to="/">
+                  <WebsiteLogo src={websiteLogo} alt="website logo" />
+                </Link>
 
-              <div className="control-button-container">
-                <button
-                  type="button"
-                  className="control-btn"
-                  onClick={onClickToggleTheme}
-                  data-testid="theme"
-                >
-                  {themeIcon}
-                </button>
+                <ControlButtonContainer>
+                  <ControlBtn
+                    type="button"
+                    onClick={onClickToggleTheme}
+                    data-testid="theme"
+                  >
+                    <StyledIcon isDark={isDarkTheme}>
+                      {isDarkTheme ? <IoSunnyOutline /> : <FaMoon />}
+                    </StyledIcon>
+                  </ControlBtn>
 
-                {/* Menu Pop Up */}
+                  {/* Menu Pop Up */}
 
-                <div>
-                  <div className="md-user-icon-account">
-                    <img
-                      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                      alt="profile"
-                      className="profile-icon"
-                    />
-                  </div>
+                  <div>
+                    <MdOnly>
+                      <ProfileIcon
+                        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                        alt="profile"
+                      />
+                    </MdOnly>
 
-                  <div className="sm-menu-icon">
-                    <Popup
-                      modal
-                      trigger={
-                        <button type="button" className="control-btn">
-                          <GiHamburgerMenu
-                            className={`icons ${
-                              isDarkTheme ? 'dark-icons' : 'light-icons'
-                            }`}
-                          />
-                        </button>
-                      }
-                      className="menu-popup"
-                    >
-                      {close => (
-                        <div
-                          className={`menu-popup-container ${
-                            isDarkTheme
-                              ? 'menu-popup-container-dark'
-                              : 'menu-popup-container-light'
-                          }`}
-                        >
-                          <div className="menu-close-container">
-                            <button
-                              type="button"
-                              className={`menu-close-button ${
-                                isDarkTheme
-                                  ? 'menu-close-button-dark'
-                                  : 'menu-close-button-light'
-                              }`}
-                              onClick={() => close()}
-                            >
-                              <IoMdClose
-                                className={`icons ${
-                                  isDarkTheme ? 'dark-icons' : 'light-icons'
-                                }`}
-                              />
-                            </button>
-                          </div>
-
-                          <ul className="menu-list">
-                            <Link to="/" className="menu-link">
-                              <li
-                                className={`menu-item ${getActiveClass(
-                                  isHomeActive,
-                                )}`}
-                              >
-                                <AiFillHome
-                                  className={`menu-icon ${
-                                    isHomeActive ? 'active-icon' : ''
-                                  }`}
-                                />
-                                <p
-                                  className={`menu-text ${
-                                    isDarkTheme
-                                      ? 'menu-text-dark'
-                                      : 'menu-text-light'
-                                  }`}
-                                >
-                                  Home
-                                </p>
-                              </li>
-                            </Link>
-
-                            <Link to="/trending" className="menu-link">
-                              <li
-                                className={`menu-item ${getActiveClass(
-                                  isTrendingActive,
-                                )}`}
-                              >
-                                <HiFire
-                                  className={`menu-icon ${
-                                    isTrendingActive ? 'active-icon' : ''
-                                  }`}
-                                />
-                                <p
-                                  className={`menu-text ${
-                                    isDarkTheme
-                                      ? 'menu-text-dark'
-                                      : 'menu-text-light'
-                                  }`}
-                                >
-                                  Trending
-                                </p>
-                              </li>
-                            </Link>
-
-                            <Link to="/gaming" className="menu-link">
-                              <li
-                                className={`menu-item ${getActiveClass(
-                                  isGamingActive,
-                                )}`}
-                              >
-                                <SiYoutubegaming
-                                  className={`menu-icon ${
-                                    isGamingActive ? 'active-icon' : ''
-                                  }`}
-                                />
-                                <p
-                                  className={`menu-text ${
-                                    isDarkTheme
-                                      ? 'menu-text-dark'
-                                      : 'menu-text-light'
-                                  }`}
-                                >
-                                  Gaming
-                                </p>
-                              </li>
-                            </Link>
-
-                            <Link to="/saved-videos" className="menu-link">
-                              <li
-                                className={`menu-item ${getActiveClass(
-                                  isSavedVideosActive,
-                                )}`}
-                              >
-                                <CgPlayListAdd
-                                  className={`menu-icon ${
-                                    isSavedVideosActive ? 'active-icon' : ''
-                                  }`}
-                                />
-                                <p
-                                  className={`menu-text ${
-                                    isDarkTheme
-                                      ? 'menu-text-dark'
-                                      : 'menu-text-light'
-                                  }`}
-                                >
-                                  Saved Videos
-                                </p>
-                              </li>
-                            </Link>
-                          </ul>
-                        </div>
-                      )}
-                    </Popup>
-                  </div>
-                </div>
-
-                {/* Logout Pop Up */}
-
-                <div>
-                  <div className="md-logout-button">
-                    {renderLogoutPopup(
-                      <button
-                        type="button"
-                        className={`desktop-logout-btn ${
-                          isDarkTheme
-                            ? 'desktop-logout-btn-dark'
-                            : 'desktop-logout-btn-light'
-                        }`}
+                    <SmOnly>
+                      <Popup
+                        modal
+                        trigger={
+                          <ControlBtn type="button">
+                            <StyledIcon isDark={isDarkTheme}>
+                              <GiHamburgerMenu />
+                            </StyledIcon>
+                          </ControlBtn>
+                        }
+                        className="menu-popup"
                       >
-                        Logout
-                      </button>,
-                    )}
+                        {close => (
+                          <MenuPopupContainer isDark={isDarkTheme}>
+                            <MenuCloseContainer>
+                              <MenuCloseButton
+                                type="button"
+                                isDark={isDarkTheme}
+                                onClick={() => close()}
+                              >
+                                <StyledIcon isDark={isDarkTheme}>
+                                  <IoMdClose />
+                                </StyledIcon>
+                              </MenuCloseButton>
+                            </MenuCloseContainer>
+
+                            <MenuList>
+                              <MenuLink to="/" onClick={() => close()}>
+                                <MenuItem
+                                  isActive={isHomeActive}
+                                  isDark={isDarkTheme}
+                                >
+                                  <MenuIconWrapper isActive={isHomeActive}>
+                                    <AiFillHome />
+                                  </MenuIconWrapper>
+                                  <MenuText isDark={isDarkTheme}>Home</MenuText>
+                                </MenuItem>
+                              </MenuLink>
+
+                              <MenuLink to="/trending" onClick={() => close()}>
+                                <MenuItem
+                                  isActive={isTrendingActive}
+                                  isDark={isDarkTheme}
+                                >
+                                  <MenuIconWrapper isActive={isTrendingActive}>
+                                    <HiFire />
+                                  </MenuIconWrapper>
+                                  <MenuText isDark={isDarkTheme}>
+                                    Trending
+                                  </MenuText>
+                                </MenuItem>
+                              </MenuLink>
+
+                              <MenuLink to="/gaming" onClick={() => close()}>
+                                <MenuItem
+                                  isActive={isGamingActive}
+                                  isDark={isDarkTheme}
+                                >
+                                  <MenuIconWrapper isActive={isGamingActive}>
+                                    <SiYoutubegaming />
+                                  </MenuIconWrapper>
+                                  <MenuText isDark={isDarkTheme}>
+                                    Gaming
+                                  </MenuText>
+                                </MenuItem>
+                              </MenuLink>
+
+                              <MenuLink
+                                to="/saved-videos"
+                                onClick={() => close()}
+                              >
+                                <MenuItem
+                                  isActive={isSavedVideosActive}
+                                  isDark={isDarkTheme}
+                                >
+                                  <MenuIconWrapper
+                                    isActive={isSavedVideosActive}
+                                  >
+                                    <CgPlayListAdd />
+                                  </MenuIconWrapper>
+                                  <MenuText isDark={isDarkTheme}>
+                                    Saved Videos
+                                  </MenuText>
+                                </MenuItem>
+                              </MenuLink>
+                            </MenuList>
+                          </MenuPopupContainer>
+                        )}
+                      </Popup>
+                    </SmOnly>
                   </div>
 
-                  <div className="sm-logout-icon">
-                    {renderLogoutPopup(
-                      <button type="button" className="control-btn">
-                        <FiLogOut
-                          className={`icons ${
-                            isDarkTheme ? 'dark-icons' : 'light-icons'
-                          }`}
-                        />
-                      </button>,
-                    )}
+                  {/* Logout Pop Up */}
+
+                  <div>
+                    <MdOnly>
+                      {renderLogoutPopup(
+                        <DesktopLogoutBtn type="button" isDark={isDarkTheme}>
+                          Logout
+                        </DesktopLogoutBtn>,
+                      )}
+                    </MdOnly>
+
+                    <SmOnly>
+                      {renderLogoutPopup(
+                        <ControlBtn type="button">
+                          <StyledIcon isDark={isDarkTheme}>
+                            <FiLogOut />
+                          </StyledIcon>
+                        </ControlBtn>,
+                      )}
+                    </SmOnly>
                   </div>
-                </div>
-              </div>
-            </div>
+                </ControlButtonContainer>
+              </HeaderContainer>
+            </>
           )
         }}
       </ThemeContext.Consumer>
